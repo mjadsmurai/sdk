@@ -1,7 +1,7 @@
 class AdsmuraiSDK {
-    async post (key, data) {
+    async post (key, data, url) {
         try {
-            const response = await fetch("https://ev.st.adsmurai.com/v1.0/bulk", {
+            const response = await fetch(url ? url : "https://ev.st.adsmurai.com/v1.0/bulk", {
                 method: "POST",
                 mode: "no-cors",
                 headers: {
