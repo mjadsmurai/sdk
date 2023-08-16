@@ -7,6 +7,10 @@ class AdsmuraiSDK {
         xhr.send(JSON.stringify(data));
     }
 
+    fetch (resource, options) {
+        return window.fetch(resource, options);
+    }
+
     pushEvent () {
         dataLayer.push(arguments);
     }
