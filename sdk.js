@@ -7,15 +7,15 @@ class AdsmuraiSDK {
         xhr.send(JSON.stringify(data));
     }
 
-    fetch (url) {
-        return new Promise((resolve, reject) => {
-            const xhr = new XMLHttpRequest();
-            xhr.open("GET", url, true);
-            xhr.withCredentials = true;
-            xhr.addEventListener("load", resolve);
-            xhr.addEventListener("error", reject);
-            xhr.send(null);    
-        });
+    fetch (url, resolve, reject) {
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", url, true);
+        xhr.withCredentials = true;
+        xhr.addEventListener("load", resolve);
+        if (reject) {
+            xhr.addEventListener("error", reject);    
+        }
+        xhr.send(null);
     }
 
     pushEvent () {
