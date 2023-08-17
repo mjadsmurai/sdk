@@ -18,6 +18,10 @@ class AdsmuraiSDK {
         xhr.send(null);
     }
 
+    setTimeout (cb, time) {
+        window.setTimeout(cb, time);
+    }
+
     pushEvent () {
         dataLayer.push(arguments);
     }
