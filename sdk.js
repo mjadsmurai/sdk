@@ -25,5 +25,12 @@ class AdsmuraiSDK {
     pushEvent () {
         dataLayer.push(arguments);
     }
+
+    log () {
+        if (typeof this.logs === "undefined") {
+            this.logs = [];
+        }
+        this.logs.push(arguments);
+    }
 }
 window.adsmuraiSDK = new AdsmuraiSDK();
