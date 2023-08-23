@@ -1,7 +1,7 @@
 class AdsmuraiSDK {
     post (key, data, url) {
         const xhr = new XMLHttpRequest();
-        xhr.open("POST", url ? url : "https://ev.st.adsmurai.com/v1.0/bulk");
+        xhr.open("POST", url ? url : "https://ev.st.adsmurai.com/v1.0/events");
         xhr.setRequestHeader("Content-type", "application/json");
         xhr.setRequestHeader("Auth-Token", key);
         xhr.send(JSON.stringify(data));
@@ -16,6 +16,30 @@ class AdsmuraiSDK {
             xhr.addEventListener("error", reject);    
         }
         xhr.send(null);
+    }
+
+    rgbToHex(r, g, b) {
+      return "#" + (1 << 24 | r << 16 | g << 8 | b).toString(16).slice(1);
+    }
+
+    getBackgroundColor () {
+        const bgColor = window.getComputedStyle(document.body, null).getPropertyValue('background');
+        let color = 'ffffff';
+
+        if (bgColor.startsWith('rgb(')) {
+            color = bgColor.replace('rgb(', '').split(') ')[0].split(',');
+            return this.rgbToHex(parseInt(color[0]), parseInt(color[1]), parseInt(color[2]));
+        }
+        
+        return color;
+    }
+
+    getPlatformSpecs () {
+        return {
+            platform: navigator.platform,
+            screen: screen,
+            bg: this.getBackgroundColor()
+        };
     }
 
     setTimeout (cb, time) {
