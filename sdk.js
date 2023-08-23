@@ -37,7 +37,10 @@ class AdsmuraiSDK {
     getPlatformSpecs () {
         return {
             platform: navigator.platform,
-            screen: screen,
+            screen: {
+                width: screen.width,
+                height: screen.height,
+            },
             bg: this.getBackgroundColor()
         };
     }
