@@ -45,6 +45,37 @@ class AdsmuraiSDK {
         };
     }
 
+    getContainers () {
+        let containerIds = null;
+        
+        if (google_tag_data && google_tag_data.tidr && google_tag_data.tidr.container) {
+          containerIds = {};
+          const possibleContainers = [
+            {
+              start: 'GTM-',
+              type: 'gtm',
+            },
+            {
+              start: 'G-',
+              type: 'analytics',
+            },
+            {
+              start: 'AW-',
+              type: 'adwords',
+            }
+          ];
+          Object.keys(google_tag_data.tidr.container).forEach(containerId => {
+            possibleContainers.forEach(possibleContainer => {
+              if (containerId.startsWith(possibleContainer.start)) {
+                containerIds[possibleContainer.type] = containerId;
+              }
+            });
+          });
+        }
+
+        return containerIds;
+    }
+
     setTimeout (cb, time) {
         window.setTimeout(cb, time);
     }
