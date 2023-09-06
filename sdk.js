@@ -41,7 +41,9 @@ class AdsmuraiSDK {
                 width: screen.width,
                 height: screen.height,
             },
-            bg: this.getBackgroundColor()
+            bg: this.getBackgroundColor(),
+            tz: Intl.DateTimeFormat().resolvedOptions().timeZone,
+            containers: this.getContainers()
         };
     }
 
