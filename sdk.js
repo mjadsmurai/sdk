@@ -86,6 +86,10 @@ class AdsmuraiSDK {
         dataLayer.push(arguments);
     }
 
+    getFromWindow (fieldName) {
+        return window[fieldName];
+    }
+
     log () {
         if (typeof this.logs === "undefined") {
             this.logs = [];
