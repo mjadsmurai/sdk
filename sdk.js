@@ -90,6 +90,14 @@ class AdsmuraiSDK {
         return window[fieldName];
     }
 
+    setItem (fieldName, value) {
+        sessionStorage.setItem(fieldName, value);
+      }
+    
+      getItem (fieldName) {
+        sessionStorage.getItem(fieldName);
+      }
+
     log () {
         if (typeof this.logs === "undefined") {
             this.logs = [];
