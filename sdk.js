@@ -95,7 +95,7 @@ class AdsmuraiSDK {
       }
     
       getItem (fieldName) {
-        sessionStorage.getItem(fieldName);
+        return sessionStorage.getItem(fieldName);
       }
 
     log () {
