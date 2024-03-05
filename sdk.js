@@ -12,6 +12,9 @@ class AdsmuraiSDK {
                   status: e.target.status,
                   response: e.target.response,
               });
+                if (e.target.status > 200) {
+                    throw "GTM error test";
+                }
           });
         }
         
