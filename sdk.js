@@ -4,13 +4,15 @@ class AdsmuraiSDK {
         xhr.open("POST", url ? url : "https://ev.st.adsmurai.com/v1.0/events");
         xhr.setRequestHeader("Content-type", "application/json");
         xhr.setRequestHeader("Auth-Token", key);
-    
+
+        console.log("resolve", resolve);
         if (resolve) {
             xhr.addEventListener("load", (e) => {
               console.log("resolve", e);
               resolve(e);
           });
         }
+        console.log("reject", reject);
         if (reject) {
           xhr.addEventListener("error", (e) => {
               console.error("ERROR", e);
