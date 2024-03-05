@@ -5,14 +5,13 @@ class AdsmuraiSDK {
         xhr.setRequestHeader("Content-type", "application/json");
         xhr.setRequestHeader("Auth-Token", key);
 
-        console.log("resolve", resolve);
         if (resolve) {
             xhr.addEventListener("load", (e) => {
               console.log("resolve", e);
-              resolve(e);
+              resolve(e.target);
           });
         }
-        console.log("reject", reject);
+        
         if (reject) {
           xhr.addEventListener("error", (e) => {
               console.error("ERROR", e);
