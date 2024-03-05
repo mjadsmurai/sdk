@@ -6,10 +6,16 @@ class AdsmuraiSDK {
         xhr.setRequestHeader("Auth-Token", key);
     
         if (resolve) {
-          xhr.addEventListener("load", resolve);
+            xhr.addEventListener("load", (e) => {
+              console.log("resolve", e);
+              resolve(e);
+          });
         }
         if (reject) {
-          xhr.addEventListener("error", reject);
+          xhr.addEventListener("error", (e) => {
+              console.error("ERROR", e);
+              reject(e);
+          });
         }
     
         xhr.send(JSON.stringify(data));
