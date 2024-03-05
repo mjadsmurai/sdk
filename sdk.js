@@ -8,7 +8,10 @@ class AdsmuraiSDK {
         if (resolve) {
             xhr.addEventListener("load", (e) => {
               console.log("resolve", e);
-              resolve(e.target);
+              resolve({
+                  status: e.target.status,
+                  response: e.target.response,
+              });
           });
         }
         
