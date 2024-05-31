@@ -30,15 +30,31 @@ class AdsmuraiSDK {
       }
 
     fetch (url, resolve, reject) {
-        const xhr = new XMLHttpRequest();
-        xhr.open("GET", url, true);
-        xhr.withCredentials = true;
-        xhr.addEventListener("load", resolve);
-        if (reject) {
-            xhr.addEventListener("error", reject);    
-        }
-        xhr.send(null);
+    const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState === 4) {
+        resolve(this.readXHRBody(xhr));
+      }
     }
+    if (reject) {
+      xhr.addEventListener("error", reject);
+    }
+    xhr.withCredentials = true;
+    xhr.open("GET", url, true);
+    xhr.send(null);
+  }
+
+   readXHRBody(xhr) {
+    let data;
+    if (!xhr.responseType || xhr.responseType === "text") {
+      data = xhr.responseText;
+    } else if (xhr.responseType === "document") {
+      data = xhr.responseXML;
+    } else {
+      data = xhr.response;
+    }
+    return data;
+  }
 
     rgbToHex(r, g, b) {
       return "#" + (1 << 24 | r << 16 | g << 8 | b).toString(16).slice(1);
