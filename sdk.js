@@ -1,4 +1,4 @@
-if (!AdsmuraiSDK) {
+if (typeof AdsmuraiSDK === 'undefined') {
   class AdsmuraiSDK {
     post (key, data, url) {
       const xhr = new XMLHttpRequest();
