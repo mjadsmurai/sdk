@@ -79,10 +79,16 @@ if (!AdsmuraiSDK) {
       return containerIds;
     }
 
-    injectScript(url, onSuccess, onError) {
+    injectScript(url, onSuccess, onError, id) {
+      id = "adsmu-sdk-" + id;
+      if (document.getElementById(id)) {
+        onSuccess();
+        return;
+      }
       const script = document.createElement('script');
       script.type = 'text/javascript';
       script.src = url;
+      script.id = id;
 
       document.head.appendChild(script);
 
