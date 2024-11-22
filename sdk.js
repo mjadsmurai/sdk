@@ -1,5 +1,19 @@
 if (typeof AdsmuraiSDK === 'undefined') {
   class AdsmuraiSDK {
+    constructor() {
+      this.setupListeners();
+    }
+
+    setupListeners() {
+      window.addEventListener("adsmu-command", (e) => {
+        console.log("COMMAND RECEIVED", e.detail);
+        switch(e.detail.command) {
+          case "run":
+            this.runInWindow(e.detail.method, e.detail.params);
+            break;
+        }
+      });
+    }
     post (key, data, url) {
       const xhr = new XMLHttpRequest();
       xhr.open("POST", url ? url : "https://ev.st.adsmurai.com/v1.0/events");
@@ -115,10 +129,11 @@ if (typeof AdsmuraiSDK === 'undefined') {
     runInWindow(method, data) {
       const methodParts = method.split('.');
       let context = window;
-      
+
       while (methodParts.length > 1) {
-          context = context[methodParts.shift()];
+        context = context[methodParts.shift()];
       }
+      console.log(context[methodParts[0]]);
       return context[methodParts[0]](...data);
     }
 
