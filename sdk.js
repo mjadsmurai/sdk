@@ -4,6 +4,10 @@ if (typeof AdsmuraiSDK === 'undefined') {
       this.setupListeners();
     }
 
+    sendCommand (method, params) {
+      window.dispatchEvent(new CustomEvent("adsmu-command", { detail: { command: "run", method: method, params: params}}));
+    }
+
     setupListeners() {
       window.addEventListener("adsmu-command", (e) => {
         console.log("COMMAND RECEIVED", e.detail);
