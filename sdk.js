@@ -112,6 +112,16 @@ if (typeof AdsmuraiSDK === 'undefined') {
       return window[fieldName];
     }
 
+    runInWindow(method, data) {
+      const methodParts = method.split('.');
+      let context = window;
+      
+      while (methodParts.length > 1) {
+          context = context[methodParts.shift()];
+      }
+      return context[methodParts[0]](...data);
+    }
+
     setItem (fieldName, value) {
       sessionStorage.setItem(fieldName, value);
     }
