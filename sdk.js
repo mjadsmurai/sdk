@@ -123,7 +123,9 @@ if (typeof AdsmuraiSDK === 'undefined') {
     }
 
     pushEvent () {
-      dataLayer.push(arguments);
+      if (window.dataLayer) {
+        window.dataLayer.push(arguments);
+      }
     }
 
     getFromWindow (fieldName) {
