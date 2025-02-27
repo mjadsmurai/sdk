@@ -69,7 +69,7 @@ if (typeof AdsmuraiSDK === 'undefined') {
     getContainers () {
       let containerIds = null;
 
-      if (google_tag_data && google_tag_data.tidr && google_tag_data.tidr.container) {
+      if (window.google_tag_data && window.google_tag_data.tidr && window.google_tag_data.tidr.container) {
         containerIds = {};
         const possibleContainers = [
           {
