@@ -18,11 +18,24 @@ if (typeof AdsmuraiSDK === 'undefined') {
         }
       });
     }
-    post (key, data, url) {
+    post (key, data, url, resolve, reject) {
       const xhr = new XMLHttpRequest();
       xhr.open("POST", url ? url : "https://ev.st.adsmurai.com/v1.0/events");
       xhr.setRequestHeader("Content-type", "application/json");
       xhr.setRequestHeader("Auth-Token", key);
+
+      if (resolve) {
+        xhr.addEventListener("load", (e) => {
+          resolve({
+            status: e.target.status,
+            response: e.target.response,
+          });
+        });
+      }
+      if (reject) {
+        xhr.addEventListener("error", reject);
+      }
+
       xhr.send(JSON.stringify(data));
     }
 
